@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Are You Gay?</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 18px;
+            margin: 10px;
+            cursor: pointer;
+            position: relative;
+        }
+        #noButton {
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+    <h1>Are you gay?</h1>
+    <button onclick="response('Yes')">Yes</button>
+    <button id="noButton" onmouseover="moveButton()" onclick="response('No')">No</button>
+
+    <p id="answer"></p>
+
+    <script>
+        function response(answer) {
+            if (answer === 'Yes') {
+                document.getElementById('answer').innerText = "Bhai Chi chi chi chi";
+                speak(" Bhai Chi chi chi chi");
+            } else {
+                document.getElementById('answer').innerText = "That's cool! Everyone is unique.";
+            }
+        }
+
+        function moveButton() {
+            // Randomize the position of the "No" button
+            const button = document.getElementById('noButton');
+            const x = Math.random() * (window.innerWidth - button.offsetWidth);
+            const y = Math.random() * (window.innerHeight - button.offsetHeight);
+            button.style.left = `${x}px`;
+            button.style.top = `${y}px`;
+        }
+
+        function speak(text) {
+            // Check if the browser supports speech synthesis
+            if ('speechSynthesis' in window) {
+                const msg = new SpeechSynthesisUtterance();
+                msg.text = text;
+                msg.lang = 'en-US'; // Set the language (you can customize this)
+                window.speechSynthesis.speak(msg);
+            } else {
+                alert("Sorry, your browser doesn't support speech synthesis.");
+            }
+        }
+    </script>
+</body>
+</html>
